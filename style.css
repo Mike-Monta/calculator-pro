@@ -127,10 +127,18 @@ body {
     width: 350px;
     height: 70px;
     background-color: aliceblue;
-    display: grid;
-    justify-content: center;
+    display: flex;
+    font-size: 40px;
+    justify-content: flex-end;
+    align-items: center;
     margin: 20px auto;
     border-radius: 5px;
+    
+}
+#screenBorder{
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 15px;
 }
 .column{
     margin: 5px;  
