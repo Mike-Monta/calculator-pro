@@ -89,6 +89,7 @@ numKeys.forEach(key => {
 
 opKeys.forEach(key =>{
     key.addEventListener('click', Event =>{
+        document.getElementById('audio').play();
         opId = key.id;
         console.log(opId);
         if (opId == "AC"){

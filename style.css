@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     background-size: cover ;
+	
 } 
 .button {
 	height: 60px;
@@ -155,11 +156,6 @@ body {
     padding-left: 5px; 
     
 }
-footer{
-    width: 100%;
-    height: 200px;
-   
-}
 #alert{
 	height: 30px;
 	width: 50%;
@@ -170,5 +166,17 @@ footer{
 	background-color: rgb(107, 84, 50);
 	border: 2px solid black;
 	border-radius: 20px;
-	
 }
+footer{
+    width: 100%;
+    height: 100px;
+    margin-left: 0;
+	padding-left: 0;
+	border: solid 10px #000;
+	border-color: #000 transparent transparent transparent;
+	border-radius: 300%/100px 100px 100px 0; 
+	transform: rotateX(180deg);
+	background: transparent;
+	position: absolute;
+	top : 650px;
+}	
