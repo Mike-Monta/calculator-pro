@@ -104,9 +104,10 @@ body {
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     border-radius: 20px;
-    background-color: rgb(148, 145, 145);
+    background-color: silver;
     margin-left: 20px auto;
     padding-right: 8px;
+	border: 2px solid black;
   
 }
 #screen{
@@ -124,7 +125,7 @@ body {
 #screenBorder{
     width: 380px;
     border: 1px solid black;
-	background-color: rgb(88, 86, 86);
+	background-color: rgb(73, 68, 68);
     border-radius: 5px;
     margin: 15px;
     display:flex;
