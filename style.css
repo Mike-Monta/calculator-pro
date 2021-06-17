@@ -20,6 +20,7 @@ body {
 	cursor: pointer;
 	margin: 15px 15px auto ;
 }
+
 .button .outer {
 	position: relative;
 	width: 100%;
@@ -73,7 +74,7 @@ body {
 	text-align: center;
 	text-shadow: #868f85 0px 0px 1px;
 	/*text-shadow: #8aff7b 0px 0px 1px;*/
-	background: #5b5e5b;
+	background: #2f3042;
 	border-radius: 12px;
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 12px;
@@ -181,3 +182,14 @@ footer{
 	position: absolute;
 	top : 650px;
 }	
+.number{
+	
+	/*text-shadow: #8aff7b 0px 0px 1px;*/
+	background: #646864;
+	border-radius: 12px;
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px
+}
+.inner{
+	color: rgb(214, 212, 212);
+}

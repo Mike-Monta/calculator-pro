@@ -134,7 +134,7 @@ opKeys.forEach(key =>{
             operationInCurse = "off";  
         }    
      })
-}}
+})
 //  Set keys to run functions
 window.addEventListener('keypress', function(e) {
     let targetKey = e.key;
