@@ -5,6 +5,7 @@ const key = document.querySelectorAll('.button');
 const onScreen = document.querySelector('#screen');
 const onScreenOp = document.querySelector('#screenOp');
 let num1 = 0;
+let num1Set= "off";
 let num2 = 0;
 let opKey= "";
 let operator="";
@@ -19,8 +20,8 @@ screenText = document.querySelector('#screen').textContent;
 function clrScreen(){
     onScreen.textContent= 0;
     onScreenOp.textContent = "";
-    console.log(typeof screenText);
-    //screenText = document.getElementById('screen').textContent;
+    result=0 , num1 = 0 , num2 = 0;
+    operationInCurse = "off";
     screenText = parseFloat(document.getElementById('screen').textContent);
 }
 clrScreen();
@@ -34,29 +35,39 @@ function updateScreen(set){
     screenText = parseFloat(document.getElementById('screen').textContent);
 }
 function resolveOp(oper){
+    num1= Number(num1);
+    num2 = Number(num2);
        if (oper == "+"){
-         return num1+num2;
+           result=num1+num2;
+           num1= result;
+           console.log( num1 , num2 , result);
+         return result;
        }
-    if (oper == "-"){
-         return num1-num2;
+        if (oper == "-"){
+        result= num1-num2;
+        num1 = result;
+         return result;
        }
-    if (oper == "/"){
+        if (oper == "/"){
+        result =(num1/num2);
+        num1 = result;
         if(num1 > 10000){ 
-            return (num1/num2).toFixed(2);
-        }else return (num1/num2);
+            return result.toFixed(2);
+        }else return result;
        }
-    if (oper == "x"){
-        return num1*num2; 
-    }
+        if (oper == "x"){
+        result= num1*num2;
+        num1 = result;
+        return result; 
+        }
 }
 //  Nums
 numKeys.forEach(key => {
     key.addEventListener('click', Event =>{
-        //console.log(operationInCurse);
         document.getElementById('audio').play();
-        if(operationInCurse === "on"){
-            onScreen.textContent = "0";
-            operationInCurse = "off";
+        if(num1Set== "on"){
+            onScreen.textContent = 0;
+            num1Set = "off";
         }
         if(key.id ==="."){
             keyId = key.id;
@@ -79,33 +90,40 @@ numKeys.forEach(key => {
                  }else{
                     updateScreen(keyId);
                  } 
-
                 }              
         }     
     })
 }) 
-
 //  Operators
 
 opKeys.forEach(key =>{
     key.addEventListener('click', Event =>{
         document.getElementById('audio').play();
+        num1Set="on";
         opId = key.id;
-        console.log(opId);
         if (opId == "AC"){
             clrScreen();
         }
-        if (opId == "+" || opId== "-" || opId == "/" || opId == "x"){
-            num1 = parseFloat(onScreen.textContent);
-            onScreenOp.textContent = opId;
-            operator = opId;
-            operationInCurse = "on";
+        if(opId == "-" && operator == "-") {
+            if(!onScreen.textContent.includes("-")) onScreen.textContent = "-"+onScreen.textContent;
         }
+        if (opId == "+" || opId== "-" || opId == "/" || opId == "x"){
+            onScreenOp.textContent = opId;
+            if(operationInCurse == "off") num1= onScreen.textContent;
+            if(operationInCurse == "on") {
+                num2= onScreen.textContent;
+                onScreen.textContent = Math.round(resolveOp(operator)*10000000000)/10000000000;
+            }
+            console.log( operationInCurse+ "Num1: "+ num1 + " Num2: "+ num2+ " Resul: "+ result);
+            operator = opId;
+            if(operationInCurse == "off"){
+                num1 = parseFloat(onScreen.textContent);
+                operationInCurse = "on";                
+            }
+        }      
          //  ToDo calculate %
-
-        if (opId === "="){              //  Do the operation and set on Screen
+        if (opId === "="){             
             num2 = parseFloat(onScreen.textContent);
-            //console.log(num2);
             if (num2 == 0){
                 onScreen.textContent= "Error";
             }else{
@@ -116,16 +134,13 @@ opKeys.forEach(key =>{
             operationInCurse = "off";  
         }    
      })
-})
-
+}}
 //  Set keys to run functions
-
 window.addEventListener('keypress', function(e) {
     let targetKey = e.key;
     if(e.key === "Enter") targetKey = '=';
     if(e.key === "*") targetKey = 'x';
-    document.getElementById(targetKey).click();
-   
+    document.getElementById(targetKey).click(); 
 });
 // Backspace key needs to be listen by keyDown instead of KeyPress
 window.addEventListener('keydown', function(e) {

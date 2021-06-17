@@ -163,7 +163,8 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: rgb(107, 84, 50);
+	/*background-color: rgb(107, 84, 50);*/
+	background-image: linear-gradient( rgb(211, 204, 204), rgb(110, 105, 105)) ;
 	border: 2px solid black;
 	border-radius: 20px;
 }
