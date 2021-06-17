@@ -66,15 +66,15 @@ body {
 	padding-bottom: 0px;
 }
 .button .outer .height .inner {
-	line-height: 2.8em;
-	font-size: 30px;
+	line-height: 2em;
+	font-size: 35px;
 	letter-spacing: .05em;
 	position: relative;
 	height: 100%;
-	text-align: center;
+	text-align: center ;
 	text-shadow: #868f85 0px 0px 1px;
-	/*text-shadow: #8aff7b 0px 0px 1px;*/
-	background: #2f3042;
+	text-shadow: #8aff7b 0px 0px 1px;
+	background: #3b3c46;
 	border-radius: 12px;
 	-webkit-border-radius: 12px;
 	-moz-border-radius: 12px;
@@ -98,6 +98,7 @@ body {
 }
 
 #keyContainer{
+	font-family: Arial, Helvetica, sans-serif;
     width: 410px;
     display: grid;
     grid-auto-flow: column;
@@ -123,6 +124,7 @@ body {
 #screenBorder{
     width: 380px;
     border: 1px solid black;
+	background-color: rgb(88, 86, 86);
     border-radius: 5px;
     margin: 15px;
     display:flex;

@@ -15,7 +15,7 @@ let keyId = "";
 let opId = "";
 let result = 0;
 let operationInCurse= "off";
-screenText = document.querySelector('#screen').textContent;
+screenText = document.querySelector('#screen').textContent;  
 
 function clrScreen(){
     onScreen.textContent= 0;
@@ -104,9 +104,14 @@ opKeys.forEach(key =>{
         if (opId == "AC"){
             clrScreen();
         }
-        if(opId == "-" && operator == "-") {
-            if(!onScreen.textContent.includes("-")) onScreen.textContent = "-"+onScreen.textContent;
+        if(opId == "sign"){
+            if(onScreen.textContent> 0){
+                onScreen.textContent= "-"+ onScreen.textContent;
+            }else{
+                onScreen.textContent = onScreen.textContent *-1;
+            }
         }
+        
         if (opId == "+" || opId== "-" || opId == "/" || opId == "x"){
             onScreenOp.textContent = opId;
             if(operationInCurse == "off") num1= onScreen.textContent;
@@ -121,7 +126,6 @@ opKeys.forEach(key =>{
                 operationInCurse = "on";                
             }
         }      
-         //  ToDo calculate %
         if (opId === "="){             
             num2 = parseFloat(onScreen.textContent);
             if (num2 == 0){
