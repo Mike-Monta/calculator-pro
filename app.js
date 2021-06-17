@@ -1,13 +1,9 @@
-// LOGIC
-
-
 // Set screen
 const numKeys = document.querySelectorAll('.num');
 const opKeys = document.querySelectorAll('.op');
 const key = document.querySelectorAll('.button');
 const onScreen = document.querySelector('#screen');
 const onScreenOp = document.querySelector('#screenOp');
-
 let num1 = 0;
 let num2 = 0;
 let opKey= "";
@@ -18,7 +14,6 @@ let keyId = "";
 let opId = "";
 let result = 0;
 let operationInCurse= "off";
-//document.querySelector('#screen').textContent= screenText;
 screenText = document.querySelector('#screen').textContent;
 
 function clrScreen(){
@@ -39,28 +34,26 @@ function updateScreen(set){
     screenText = parseFloat(document.getElementById('screen').textContent);
 }
 function resolveOp(oper){
-    console.log(num1, num2)
-    if (oper == "+"){
-         onScreen.textContent= num1+num2;
+       if (oper == "+"){
+         return num1+num2;
        }
     if (oper == "-"){
-         onScreen.textContent= num1-num2;
+         return num1-num2;
        }
     if (oper == "/"){
-         onScreen.textContent= parseFloat(num1/num2).toFixed(10);
+        if(num1 > 10000){ 
+            return (num1/num2).toFixed(2);
+        }else return (num1/num2);
        }
     if (oper == "x"){
-        onScreen.textContent= Math.round(num1*num2);
-       }
-       operator = "";
-       onScreenOp.textContent = "";
-       operationInCurse = "off";
-
+        return num1*num2; 
+    }
 }
 //  Nums
 numKeys.forEach(key => {
     key.addEventListener('click', Event =>{
-        console.log(operationInCurse);
+        //console.log(operationInCurse);
+        document.getElementById('audio').play();
         if(operationInCurse === "on"){
             onScreen.textContent = "0";
             operationInCurse = "off";
@@ -70,11 +63,7 @@ numKeys.forEach(key => {
         }else {
             keyId = parseFloat(key.id);
         }
-        console.log(typeof keyId + keyId);
-        console.log(typeof screenText + screenText);
-        if(screenText.toString().length < 12){
-            
-            
+        if(onScreen.textContent.toString().length < 12){
             if (onScreen.textContent === "0" && keyId=== "."){
                 onScreen.textContent = "0.";
             }else {
@@ -90,15 +79,12 @@ numKeys.forEach(key => {
                  }else{
                     updateScreen(keyId);
                  } 
-            
 
-                }             
-             console.log(screenText);
-             //console.log(parseFloat(document.getElementById('screen').textContent)); 
-             //console.log(screenText.toString.length); 
+                }              
         }     
     })
 }) 
+
 //  Operators
 
 opKeys.forEach(key =>{
@@ -114,16 +100,36 @@ opKeys.forEach(key =>{
             operator = opId;
             operationInCurse = "on";
         }
-        if (opId === "="){
-            num2 = parseFloat(screenText);
-            resolveOp(operator);
-            operationInCurse = "off";
-        }
+         //  ToDo calculate %
 
-       // if(opId === "=" && num1 == 0){
-            
+        if (opId === "="){              //  Do the operation and set on Screen
+            num2 = parseFloat(onScreen.textContent);
+            //console.log(num2);
+            if (num2 == 0){
+                onScreen.textContent= "Error";
+            }else{
+            onScreen.textContent = Math.round(resolveOp(operator)*10000000000)/10000000000; // fits numbers to screen
+            }
+            operator = "";
+            onScreenOp.textContent = "";
+            operationInCurse = "off";  
+        }    
+     })
+})
 
-        
-    })
+//  Set keys to run functions
+
+window.addEventListener('keypress', function(e) {
+    let targetKey = e.key;
+    if(e.key === "Enter") targetKey = '=';
+    if(e.key === "*") targetKey = 'x';
+    document.getElementById(targetKey).click();
+   
+});
+// Backspace key needs to be listen by keyDown instead of KeyPress
+window.addEventListener('keydown', function(e) {
+    let targetKey = e.key;
+    if(targetKey === "Backspace") document.getElementById("AC").click();
+     
 })
 
