@@ -140,16 +140,28 @@ opKeys.forEach(key =>{
      })
 })
 //  Set keys to run functions
-window.addEventListener('keypress', function(e) {
+window.addEventListener('keydown', function(e) {
     let targetKey = e.key;
     if(e.key === "Enter") targetKey = '=';
     if(e.key === "*") targetKey = 'x';
-    document.getElementById(targetKey).click(); 
+    if(targetKey === "Backspace") targetKey = 'AC';
+    currentElement = document.getElementById(targetKey);
+    currentElement.classList.add('button-active');
+    document.getElementById(targetKey).click();     
 });
-// Backspace key needs to be listen by keyDown instead of KeyPress
-window.addEventListener('keydown', function(e) {
-    let targetKey = e.key;
-    if(targetKey === "Backspace") document.getElementById("AC").click();
-     
-})
 
+window.addEventListener('keyup', function(e) {
+    let targetKey = e.key;
+    if(e.key === "Enter") targetKey = '=';
+    if(e.key === "*") targetKey = 'x';
+    if(targetKey === "Backspace") targetKey = 'AC';
+    currentElement = document.getElementById(targetKey);
+    currentElement.classList.remove('button-active');
+});
+
+// Backspace key needs to be listen by keyDown instead of KeyPress
+// window.addEventListener('keydown', function(e) {
+//     let targetKey = e.key;
+//     if(targetKey === "Backspace") document.getElementById("AC").click();
+     
+// })
